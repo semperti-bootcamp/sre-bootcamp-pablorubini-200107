@@ -9,4 +9,4 @@
     - name: install Maven
       yum:
         name: maven
-        state: present
+        state: latest
