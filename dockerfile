@@ -10,6 +10,6 @@ RUN mvn -f ./Code/pom.xml clean package
 # Package stage
 #
 FROM openjdk:8
-COPY --from=build ./Code/target/journals-1.0.jar /usr/local/lib/demo.jar
+COPY --from=build ./Code/target/journals-1.0.jar /usr/local/lib/journals-1.0.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
+ENTRYPOINT ["java","-jar","/usr/local/lib/journals-1.0.jar"]
