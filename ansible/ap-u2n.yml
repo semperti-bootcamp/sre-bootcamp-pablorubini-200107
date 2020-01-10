@@ -1,0 +1,5 @@
+- hosts: bootcamp
+-
+
+
+mvn --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT && mvn clean deploy
