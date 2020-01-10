@@ -2,10 +2,7 @@
 # Build stage
 #
 FROM maven:3.6.3-jdk-8 AS build
-COPY src ./Code/src
-COPY pom.xml ./Code
 RUN mvn -f ./Code/pom.xml clean package
-
 #
 # Package stage
 #
