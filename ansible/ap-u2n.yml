@@ -1,5 +1,9 @@
 - hosts: bootcamp
--
+  remote_user: root
+  become: yes
+  tasks:
+  - name: Upload snapshot to Nexus
+    shell: cd ~/sre-bootcamp-pablorubini-200107/Code && mvn --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT && mvn clean deploy
 
-
-mvn --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT && mvn clean deploy
+  - name: Rename version 1.0
+    shell: cd ~/sre-bootcamp-pablorubini-200107/Code && mvn --batch-mode release:update-versions -DdevelopmentVersion=1.0
