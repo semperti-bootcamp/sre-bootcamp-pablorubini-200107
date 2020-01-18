@@ -17,7 +17,7 @@ pipeline {
         stage('Package') {
             steps {
                 echo 'Packaging....'
-                sh 'mvn -f Code/pom.xml package'
+                sh 'mvn -f Code/pom.xml package -Dmaven.test.skip=true'
             }
         }
         stage('Snapshot') {
