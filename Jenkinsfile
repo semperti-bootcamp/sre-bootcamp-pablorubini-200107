@@ -18,17 +18,18 @@ pipeline {
             steps {
                 echo 'Doing a curl...'
                 sh 'curl 10.252.7.110:8080'
+                timeout(5) {
+                    waitUntil {
+                        script {
+                        def r = sh script: 'wget -q http://10.252.7.110:8080 -O /dev/null', returnStatus: true
+                        return (r == 0);
+                        }
+                    }
+                }
             }
         }
     }
-    timeout(5) {
-    waitUntil {
-       script {
-         def r = sh script: 'wget -q http://10.252.7.110:8080 -O /dev/null', returnStatus: true
-         return (r == 0);
-       }
-    }
-}
+
     post {
         always {
             echo 'This will always run'
