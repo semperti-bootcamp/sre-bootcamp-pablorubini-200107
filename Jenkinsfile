@@ -13,6 +13,12 @@ pipeline {
                 echo 'Running..'
                 sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
             }
+        stage('Test web'){
+            steps {
+                echo 'Doing a curl...'
+                sh 'curl 10.252.7.110:8080'
+            }
+        }
         }
         // stage('Package') {
         //     steps {
