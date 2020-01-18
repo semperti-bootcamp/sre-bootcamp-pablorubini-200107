@@ -8,12 +8,12 @@ pipeline {
                 sh 'docker pull pablitorub/journals:latest'
             }
         }
-        // stage('Test') {
-        //     steps {
-        //         echo 'Testing..'
-        //         sh 'mvn -f Code/pom.xml test'
-        //     }
-        // }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+            }
+        }
         // stage('Package') {
         //     steps {
         //         echo 'Packaging....'
