@@ -24,6 +24,7 @@ pipeline {
             steps {
                 echo 'Uploading snapshot to nexus'
                 sh 'mvn -f Code/pom.xml --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT'
+                sh 'mvn -f Code/pom.xml clean deploy -Dmaven.test.skip=true'
             }
         }
 
