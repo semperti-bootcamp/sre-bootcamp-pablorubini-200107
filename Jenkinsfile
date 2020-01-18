@@ -14,12 +14,12 @@ pipeline {
         //         sh 'mvn -f Code/pom.xml test'
         //     }
         // }
-        // stage('Package') {
-        //     steps {
-        //         echo 'Packaging....'
-        //         sh 'mvn -f Code/pom.xml package -Dmaven.test.skip=true'
-        //     }
-        // }
+        stage('Package') {
+            steps {
+                echo 'Packaging....'
+                sh 'mvn -f Code/pom.xml package -Dmaven.test.skip=true'
+            }
+        }
         stage('Snapshot') {
             steps {
                 echo 'Uploading snapshot to nexus'
