@@ -29,9 +29,10 @@ pipeline {
         stage('Docker') {
             steps {
                 echo 'Creating docker image...'
-                sh 'docker build -f dockerfile -t sre-bootcamp/Journals:1.0 -t sre-bootcamp/Journals:latest .'
+                sh 'docker build -f dockerfile -t pablitorub/journals:1.0 -t pablitorub/journals:latest .'
                 echo 'Uploading docker image to dockerhub...'
-                sh ''
+                sh 'docker push pablitorub/journals:latest'
+                sh 'docker push pablitorub/journals:1.0'
             }
         }
     }
