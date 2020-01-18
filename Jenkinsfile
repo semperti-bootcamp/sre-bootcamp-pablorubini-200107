@@ -16,8 +16,6 @@ pipeline {
         }
         stage('Test web') {
             steps {
-                echo 'Doing a curl...'
-                sh 'curl 10.252.7.110:8080'
                 timeout(5) {
                     waitUntil {
                         script {
