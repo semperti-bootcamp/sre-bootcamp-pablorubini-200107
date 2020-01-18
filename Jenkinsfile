@@ -12,14 +12,6 @@ pipeline {
             steps {
                 echo 'Running..'
                 sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-                timeout(5) {
-                    waitUntil {
-                    `script {
-                        def r = sh script: 'wget -q http://10.252.7.110:8080 -O /dev/null', returnStatus: true
-                        return (r == 0);
-       }
-    }
-}
             }
         }
         stage('Test web') {
@@ -28,33 +20,15 @@ pipeline {
                 sh 'curl 10.252.7.110:8080'
             }
         }
-        
-        // stage('Package') {
-        //     steps {
-        //         echo 'Packaging....'
-        //         sh 'mvn -f Code/pom.xml package -Dmaven.test.skip=true'
-        //     }
-        // }
-        // stage('Snapshot') {
-        //     steps {
-        //         echo 'Uploading snapshot to nexus'
-        //         sh 'mvn -f Code/pom.xml --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT'
-        //         sh 'mvn -f Code/pom.xml clean deploy -Dmaven.test.skip=true'
-        //         sh 'mvn -f Code/pom.xml versions:set -DnewVersion=1.0 ; mvn  -f Code/pom.xml clean package -Dmaven.test.skip=true'
-        //     }
-        // }
-
-        // stage('Docker') {
-        //     steps {
-        //         echo 'Creating docker image...'
-        //         sh 'docker build -f dockerfile -t pablitorub/journals:1.0 -t pablitorub/journals:latest .'
-        //         echo 'Uploading docker image to dockerhub...'
-        //         sh 'docker push pablitorub/journals:latest'
-        //         sh 'docker push pablitorub/journals:1.0'
-        //     }
-        // }
     }
-
+    timeout(5) {
+    waitUntil {
+       script {
+         def r = sh script: 'wget -q http://10.252.7.110:8080 -O /dev/null', returnStatus: true
+         return (r == 0);
+       }
+    }
+}
     post {
         always {
             echo 'This will always run'
