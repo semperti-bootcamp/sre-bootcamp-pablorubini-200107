@@ -20,7 +20,22 @@ pipeline {
                 sh 'mvn -f Code/pom.xml package'
             }
         }
+        stage('Snapshot') {
+            steps {
+                echo 'Uploading snapshot to nexus'
+                sh 'mvn --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT'
+            }
+        }
+        stage('Docker') {
+            steps {
+                echo 'Creating docker image...'
+                sh 'docker build -f dockerfile -t sre-bootcamp/Journals:1.0 -t sre-bootcamp/Journals:latest .'
+                echo 'Uploading docker image to dockerhub...'
+                sh ''
+            }
+        }
     }
+
     post {
         always {
             echo 'This will always run'
