@@ -2,7 +2,7 @@ pipeline {
     agent { node { label 'pr-bc' } }
 
     stages {
-        stage('Build') {
+   /*     stage('Build') {
             steps {
                 echo 'Building..'
                 sh 'mvn -f Code/pom.xml compile'
@@ -19,13 +19,14 @@ pipeline {
                 echo 'Packaging....'
                 sh 'mvn -f Code/pom.xml package -Dmaven.test.skip=true'
             }
-        }
+        }*/
         stage('Snapshot') {
             steps {
                 echo 'Uploading snapshot to nexus'
                 sh 'mvn -f Code/pom.xml --batch-mode release:update-versions -DdevelopmentVersion=1.0-SNAPSHOT'
             }
         }
+
         stage('Docker') {
             steps {
                 echo 'Creating docker image...'
