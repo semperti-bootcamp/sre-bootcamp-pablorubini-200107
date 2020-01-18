@@ -5,19 +5,19 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'cd Code ; mvn compile'
+                sh 'mvn -f Code/pom.xml compile'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'mvn test'
+                sh 'mvn -f Code/pom.xml test'
             }
         }
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
-                sh 'mvn package'
+                sh 'mvn -f Code/pom.xml package'
             }
         }
     }
