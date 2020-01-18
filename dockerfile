@@ -5,7 +5,7 @@
 FROM maven:3.6.3-jdk-8 AS build
 COPY Code/src /home/app/src
 COPY Code/pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
 #
 # Package stage
 #
