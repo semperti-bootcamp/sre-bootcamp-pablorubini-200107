@@ -12,6 +12,14 @@ pipeline {
             steps {
                 echo 'Running..'
                 sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                timeout(5) {
+                    waitUntil {
+                    `script {
+                        def r = sh script: 'wget -q http://remoterhoste/welcome.jsf -O /dev/null', returnStatus: true
+                        return (r == 0);
+       }
+    }
+}
             }
         }
         stage('Test web') {
