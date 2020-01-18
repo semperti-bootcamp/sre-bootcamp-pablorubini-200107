@@ -8,9 +8,9 @@ pipeline {
                 sh 'docker pull pablitorub/journals:latest'
             }
         }
-        stage('Test') {
+        stage('Run Docker') {
             steps {
-                echo 'Testing..'
+                echo 'Running..'
                 sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
             }
         }
