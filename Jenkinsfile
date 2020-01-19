@@ -19,7 +19,7 @@ pipeline {
                 timeout(5) {
                     waitUntil {
                         script {
-                        def r = sh script: 'curl http://10.252.7.110:8080', returnStatus: true
+                        def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
                         return (r == 0);
                         }
                     }
