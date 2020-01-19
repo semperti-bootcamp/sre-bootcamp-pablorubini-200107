@@ -2,24 +2,24 @@ pipeline {
     agent { node { label 'pr-bc' } }
 
     stages {
-        stage('Pull Docker') {
-            steps {
-                echo 'Pulling..'
-                sh 'docker pull pablitorub/journals:latest'
-            }
-        }
-        stage('Run Docker') {
-            steps {
-                echo 'Running..'
-                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-            }
-        }
+        // stage('Pull Docker') {
+        //     steps {
+        //         echo 'Pulling..'
+        //         sh 'docker pull pablitorub/journals:latest'
+        //     }
+        // }
+        // stage('Run Docker') {
+        //     steps {
+        //         echo 'Running..'
+        //         sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+        //     }
+        // }
         stage('Test web') {
             steps {
                 timeout(5) {
                     waitUntil {
                         script {
-                        def r = sh script: 'curl http://10.252.7.110:8080 -O /dev/null', returnStatus: true
+                        def r = sh script: 'curl http://10.252.7.110:8080', returnStatus: true
                         return (r == 0);
                         }
                     }
