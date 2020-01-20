@@ -9,53 +9,28 @@ pipeline {
             }
         }
         stage('Docker exists?') {
-            try {
-            sh 'exit 1'
+            steps {
+                sh Scripts/checkdocker.sh
+            }
         }
-        catch (exc) {
-            echo 'Something failed, I should sound the klaxons!'
-            throw
+        stage('Run Docker') {
+            steps {
+                echo 'Running..'
+                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+            }
         }
+        stage('Test web') {
+            steps {
+                timeout(5) {
+                    waitUntil {
+                        script {
+                        def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
+                        return (r == 0);
+                        }
+                    }
+                }
+            }
         }
-    
-            // try {
-
-            //     echo 'Checking if docker exists and deleting ...'
-            //     def dockerID = sh 'docker container ps -aq -f ancestor=pablitorub/journals'
-            //     sh "docker container stop ${dockerID}"
-            //     sh "xargs docker rm ${dockerID}"
-            // } catch (exception) {
-            //         echo 'Container does not exists'
-            //     }
-                // echo 'Checking if docker exists and deleting ...'    
-            
-                //             script {
-                //                 def dockerID = sh 'docker container ps -aq -f ancestor=pablitorub/journals'
-                //                 sh "docker container stop ${dockerID}"
-                //                 sh "xargs docker rm ${dockerID}"
-                //             }
-                //         } catch (exception){
-                //             echo = 'Container does not exists'
-                //     }
-                // }
-        // stage('Run Docker') {
-        //     steps {
-        //         echo 'Running..'
-        //         sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-        //     }
-        // }
-        // stage('Test web') {
-        //     steps {
-        //         timeout(5) {
-        //             waitUntil {
-        //                 script {
-        //                 def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
-        //                 return (r == 0);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
     }
 
     post {
