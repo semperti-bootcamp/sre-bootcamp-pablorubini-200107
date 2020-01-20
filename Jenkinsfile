@@ -10,6 +10,7 @@ pipeline {
         }
         stage('Docker exists?') {
             steps {
+                sh 'chmod u+rx,g+rx,o+rx Scripts/checkdocker.sh'
                 sh 'Scripts/checkdocker.sh'
             }
         }
