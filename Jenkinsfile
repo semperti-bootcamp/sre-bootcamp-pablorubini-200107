@@ -17,12 +17,11 @@ pipeline {
                     sh "docker container stop ${dockerID}"
                     sh "xargs docker rm ${dockerID}"
                 }
-                catch (exception){
-                    echo = 'Container does not exists'
-                }
+                    catch (exception){
+                        echo = 'Container does not exists'
+                    }
                 }
             }
-
         }
         stage('Run Docker') {
             steps {
