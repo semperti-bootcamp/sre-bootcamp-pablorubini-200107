@@ -22,7 +22,6 @@ pipeline {
                             echo = 'Container does not exists'
                     }
                 }
-        }
         stage('Run Docker') {
             steps {
                 echo 'Running..'
