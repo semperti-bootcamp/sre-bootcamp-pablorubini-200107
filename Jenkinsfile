@@ -17,6 +17,7 @@ pipeline {
             throw
         }
         }
+    
             // try {
 
             //     echo 'Checking if docker exists and deleting ...'
