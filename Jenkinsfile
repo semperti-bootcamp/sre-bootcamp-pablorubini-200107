@@ -12,7 +12,7 @@ pipeline {
             try {
             sh 'exit 1'
         }
-        catch (exception e) {
+        catch (exc) {
             echo 'Something failed, I should sound the klaxons!'
             throw
         }
