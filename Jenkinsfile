@@ -16,6 +16,7 @@ pipeline {
             echo 'Something failed, I should sound the klaxons!'
             throw
         }
+        }
             // try {
 
             //     echo 'Checking if docker exists and deleting ...'
@@ -25,7 +26,6 @@ pipeline {
             // } catch (exception) {
             //         echo 'Container does not exists'
             //     }
-            }
                 // echo 'Checking if docker exists and deleting ...'    
             
                 //             script {
