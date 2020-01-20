@@ -11,10 +11,15 @@ pipeline {
         stage('Docker exists?') {
             steps { 
                 echo 'Checking if docker exists and deleting ...'
+                try {
                 script {
                     def dockerID = sh 'docker container ps -aq -f ancestor=pablitorub/journals'
                     sh "docker container stop ${dockerID}"
                     sh "xargs docker rm ${dockerID}"
+                }
+                catch (exception)[
+                    echo = 'Container does not exists'
+                ] 
                 }
             }
 
