@@ -17,9 +17,9 @@ pipeline {
                     sh "docker container stop ${dockerID}"
                     sh "xargs docker rm ${dockerID}"
                 }
-                catch (exception)[
+                catch (exception){
                     echo = 'Container does not exists'
-                ] 
+                }
                 }
             }
 
