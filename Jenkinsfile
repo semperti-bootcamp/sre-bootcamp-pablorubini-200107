@@ -2,18 +2,29 @@ pipeline {
     agent { node { label 'pr-bc' } }
 
     stages {
-        // stage('Pull Docker') {
-        //     steps {
-        //         echo 'Pulling..'
-        //         sh 'docker pull pablitorub/journals:latest'
-        //     }
-        // }
-        // stage('Run Docker') {
-        //     steps {
-        //         echo 'Running..'
-        //         sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-        //     }
-        // }
+        stage('Pull Docker') {
+            steps {
+                echo 'Pulling..'
+                sh 'docker pull pablitorub/journals:latest'
+            }
+        }
+        stage('Docker exists?') {
+            steps { 
+                echo 'Checking if docker exists and deleting ...'
+                script {
+                env.docker= sh 'docker container ps -aq -f ancestor=pablitorub/journals'
+                sh 'docker container stop $env.docker'
+                sh 'xargs docker rm $env.docker'
+                }
+            }
+
+        }
+        stage('Run Docker') {
+            steps {
+                echo 'Running..'
+                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+            }
+        }
         stage('Test web') {
             steps {
                 timeout(5) {
