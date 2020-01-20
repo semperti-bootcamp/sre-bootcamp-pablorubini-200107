@@ -15,7 +15,8 @@ pipeline {
                     def dockerID = sh 'docker container ps -aq -f ancestor=pablitorub/journals'
                     sh "docker container stop ${dockerID}"
                     sh "xargs docker rm ${dockerID}"
-                } catch (exception) {
+                }
+            } catch (exception) {
                     echo 'Container does not exists'
                 }
             }
