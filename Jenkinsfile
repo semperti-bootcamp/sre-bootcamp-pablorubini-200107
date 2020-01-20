@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Docker exists?') {
             steps {
-                sh Scripts/checkdocker.sh
+                sh 'Scripts/checkdocker.sh'
             }
         }
         stage('Run Docker') {
