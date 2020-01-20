@@ -12,9 +12,9 @@ pipeline {
             steps { 
                 echo 'Checking if docker exists and deleting ...'
                 script {
-                env.docker= sh 'docker container ps -aq -f ancestor=pablitorub/journals'
-                sh 'docker container stop $env.docker'
-                sh 'xargs docker rm $env.docker'
+                    def dockerID = sh 'docker container ps -aq -f ancestor=pablitorub/journals'
+                    sh 'docker container stop $dockerID'
+                    sh 'xargs docker rm $dockerID'
                 }
             }
 
