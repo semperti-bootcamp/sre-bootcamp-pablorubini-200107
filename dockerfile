@@ -12,4 +12,6 @@ RUN mvn -f /home/app/pom.xml clean package -Dmaven.test.skip=true
 FROM openjdk:8
 COPY --from=build /home/app/target/journals-1.0.jar /usr/local/lib/journals-1.0.jar
 EXPOSE 8080
+EXPOSE 443
+
 ENTRYPOINT ["java","-jar","/usr/local/lib/journals-1.0.jar"]
