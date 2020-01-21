@@ -1,12 +1,17 @@
-# Dockerizado de la App
+# Utilización de Dockerhub como repo de imagenes
 
-El link para provar la app es el [siguiente](10.252.7.110:8080)
+Se genero la docker image con el siguiente comando:
 
-## Container
+`docker build -f dockerfile -t pablitorub/journals:1.0 -t pablitorub/journals:latest`
 
-Se muestra una imagen con los datos del container
+**Nota:** Se tagueó la imagen con 2 etiquetas,
+  1. journals:1.0
+  2. journals:latest
 
-![Docker](/Images/docker.png)
+Luego de generada la imagen, se subió a dockerhub:
+`docker push pablitorub/journals:latest`
+`docker push pablitorub/journals:1.0`
+
 
 **NOTAS:** se habilitó la base de datos para que acepte conexiones remotas, ya que la imagen de docker se creó sólamente con la aplicación Java, dejando la base de datos en la máquina virtual creada en el Assignment 01.
 
