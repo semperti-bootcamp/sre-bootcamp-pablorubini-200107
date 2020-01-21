@@ -2,7 +2,7 @@ pipeline {
     agent { node { label 'pr-bc' } }
 
     stages {
-        stage('Build') {
+        stage('Buildaa') {
             steps {
                 echo 'Building..'
                 sh 'mvn -f Code/pom.xml compile'
