@@ -13,5 +13,4 @@ Aqui se muestra el output de los tests de la aplicación Journals, con éxito.
 
 Aqui se muestra el inicio de la aplicación web
 
-
 ![Interfaz Web App](/Images/app.png)
