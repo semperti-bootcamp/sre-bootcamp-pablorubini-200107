@@ -8,4 +8,4 @@ Se configuró la vm a través de 2 playbooks:
 
 ## Imagenes de los paquetes configurados
 
-![Componentes instalados](/Images/Installed components.jpg)
+![Componentes instalados](/Images/Installed-components.jpg)
