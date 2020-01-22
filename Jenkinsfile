@@ -1,7 +1,8 @@
+def man = readJSON file: 'manifest_new.json'
+
 pipeline {
     agent { node { label 'pr-bc' } }
-
-    def man = readJSON file: 'manifest_new.json'
+    
     echo "${man.manifest_version}"
 
     // stages {
