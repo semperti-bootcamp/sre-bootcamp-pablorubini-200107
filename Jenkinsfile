@@ -1,11 +1,14 @@
-def man = readJSON file: 'manifest_new.json';
-
 pipeline {
     agent { node { label 'pr-bc' } }
     stages {
         stage ('Test'){
             steps {
+                script {
+                def man = readJSON file: 'manifest_new.json';
+
                 echo "the version of this manifest is: ${man.manifest_version}" 
+                
+                }
             }
         }
     }
