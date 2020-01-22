@@ -19,7 +19,14 @@ pipeline {
                         echo 'hay cambios en el repo, building...'
                         
                         echo 'Actualizando manifest-old'
-                            manold.manifest_version = mannew.manifest_version
+                            sh 'rm -rf manifest-old.json'
+                            sh 'cp manifest-new.json manifest-old.json'
+                            
+                            //Falta pushear desde el server los archivos modificados a la branch a09-gitops
+
+                            //If ambiente prod entonces hago todo Y PUERTO 8080
+                            // if ambiente staging entonces no pulleo ni corro
+
                             stage ('Pull Docker'){
                                 echo 'Pulling docker ...'
                                 sh 'docker pull pablitorub/journals:latest'
