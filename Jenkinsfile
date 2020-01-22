@@ -4,6 +4,7 @@ pipeline {
         stage ('Test'){
             steps {
                 script {
+                echo 'por definir el manifesto'
                 def man = readJSON file: 'manifest_new.json';
 
                 echo "the version of this manifest is: ${man.manifest_version}" 
