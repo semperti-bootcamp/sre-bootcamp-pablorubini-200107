@@ -13,6 +13,8 @@ pipeline {
                     def man = readJSON file: 'manifest-new.json'
                     echo "the version of this manifest is: ${mannew.manifest_version}" 
                     
+                    } else {
+                        echo 'puto el que lee'
                     }
                 }
             }
