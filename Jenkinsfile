@@ -17,6 +17,14 @@ pipeline {
                         echo "No existen cambios en el repo" 
                     } else {
                         echo 'hay cambios en el repo, building...'
+                        
+                        echo 'Actualizando manifest-old'
+                            manold.manifest_version = mannew.manifest_version
+                            stage ('Pull Docker'){
+                                echo 'Pulling docker ...'
+                                sh 'docker pull pablitorub/journals:latest'
+                            }
+
                     }
                 }
             } 
