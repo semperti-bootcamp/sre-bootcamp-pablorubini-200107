@@ -1,19 +1,19 @@
-//#!groovy
 
-
-
+def mannew = readJSON file: 'manifest-new.json'
+def manold = readJSON file: 'manifest-old.json'
 pipeline {
     agent { node { label 'pr-bc' } }
     stages {
-        stage ('Test'){
-            steps {
-                script {
-                echo 'por definir el manifesto'
-                def man = readJSON file: 'manifest-new.json'
-
-                //def manifest_version = 1
-                echo "the version of this manifest is: ${man.manifest_version}" 
-                
+        
+        stage ('Revisar manifest'){
+            if (mannew.manifest_version == manold.manifest_version){
+                steps {
+                    script {
+                    echo 'por definir el manifesto'
+                    def man = readJSON file: 'manifest-new.json'
+                    echo "the version of this manifest is: ${mannew.manifest_version}" 
+                    
+                    }
                 }
             }
         }

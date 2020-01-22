@@ -6,6 +6,6 @@
     "default_locale": "en",
 
     //
-    "tipo_ambiente":"producción",
+    "tipo_ambiente":"producción"
 
 }
