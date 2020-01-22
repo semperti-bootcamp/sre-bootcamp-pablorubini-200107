@@ -14,9 +14,9 @@ pipeline {
                     mannew = readJSON file: 'manifest-new.json'
                     manold = readJSON file: 'manifest-old.json'
                     if (mannew.manifest_version == manold.manifest_version){
-                        echo "the version of this manifest is: ${mannew.manifest_version}" 
+                        echo "No existen cambios en el repo" 
                     } else {
-                        echo 'puto el que lee'
+                        echo 'hay cambios en el repo, building...'
                     }
                 }
             } 
