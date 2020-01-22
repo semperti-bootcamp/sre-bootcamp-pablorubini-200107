@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage ('Test'){
             steps {
-                echo "${man.manifest_version}" 
+                echo "the version of this manifest is: ${man.manifest_version}" 
             }
         }
     }
