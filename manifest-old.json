@@ -1,0 +1,11 @@
+{
+    //Datos del manifest
+    "manifest_version": 1,
+    "name": "Journals App Manifest",
+    "version": "versionString",
+    "default_locale": "en",
+
+    //
+    "tipo_ambiente":"producción",
+
+}
