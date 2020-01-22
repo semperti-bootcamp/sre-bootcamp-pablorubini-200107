@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                 echo 'por definir el manifesto'
-                man = readJSON file: 'manifest_new.json';
+                man = readJSON file: 'manifest_new.json'
 
                 //def manifest_version = 1
                 echo "the version of this manifest is: ${man.manifest_version}" 
