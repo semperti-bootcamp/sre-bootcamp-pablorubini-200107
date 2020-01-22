@@ -7,17 +7,18 @@ pipeline {
     stages {
         
         stage ('Revisar manifest'){
-            if (mannew.manifest_version == manold.manifest_version){
-                steps {
-                    script {
-                        echo 'por definir el manifesto'
-                        def man = readJSON file: 'manifest-new.json'
-                        echo "the version of this manifest is: ${mannew.manifest_version}" 
+            
+            steps {
+                script {
+                    if (mannew.manifest_version == manold.manifest_version){
+                    echo 'por definir el manifesto'
+                    def man = readJSON file: 'manifest-new.json'
+                    echo "the version of this manifest is: ${mannew.manifest_version}" 
+                    } else {
+                        echo 'puto el que lee'
                     }
-                } 
-            } else {
-                echo 'puto el que lee'
-            }
+                }
+            } 
         }
     }
 
