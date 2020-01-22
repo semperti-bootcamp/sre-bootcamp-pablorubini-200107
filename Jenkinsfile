@@ -1,3 +1,4 @@
+#!groovy
 
 def mannew = readJSON file: 'manifest-new.json'
 def manold = readJSON file: 'manifest-old.json'
