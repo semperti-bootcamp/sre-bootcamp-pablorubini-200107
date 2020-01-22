@@ -1,4 +1,4 @@
-def man = readJSON file: 'manifest_new.json'
+def man = readJSON file: 'manifest_new.json';
 
 pipeline {
     agent { node { label 'pr-bc' } }
