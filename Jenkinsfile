@@ -4,9 +4,9 @@ pipeline {
     agent { node { label 'pr-bc' } }
     stages {
         stage ('Test'){
-
-            echo "${man.manifest_version}"
-
+            steps {
+                echo "${man.manifest_version}" 
+            }
         }
     }
 
