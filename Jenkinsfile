@@ -1,3 +1,5 @@
+def man = readJSON file: './manifest_new.json';
+
 pipeline {
     agent { node { label 'pr-bc' } }
     stages {
@@ -5,9 +7,8 @@ pipeline {
             steps {
                 script {
                 echo 'por definir el manifesto'
-                //def man = readJSON file: './manifest_new.json';
-                def manifest_version = 1
-                echo "the version of this manifest is: ${manifest_version}" 
+                //def manifest_version = 1
+                echo "the version of this manifest is: ${MAN.manifest_version}" 
                 
                 }
             }
