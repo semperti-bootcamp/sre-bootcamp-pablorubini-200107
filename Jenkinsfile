@@ -1,6 +1,6 @@
-#!groovy
+//#!groovy
 
-def man
+
 
 pipeline {
     agent { node { label 'pr-bc' } }
@@ -9,7 +9,7 @@ pipeline {
             steps {
                 script {
                 echo 'por definir el manifesto'
-                man = readJSON file: 'manifest-new.json'
+                def man = readJSON file: 'manifest-new.json'
 
                 //def manifest_version = 1
                 echo "the version of this manifest is: ${man.manifest_version}" 
