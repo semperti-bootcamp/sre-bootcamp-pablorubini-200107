@@ -1,38 +1,41 @@
 pipeline {
     agent { node { label 'pr-bc' } }
 
-    stages {
-        stage('Pull Docker') {
-            steps {
-                echo 'Pulling..'
-                sh 'docker pull pablitorub/journals:latest'
-            }
-        }
-        stage('Docker exists?') {
-            steps {
-                sh 'chmod u+rx Scripts/checkdocker.sh'
-                sh 'Scripts/checkdocker.sh'
-            }
-        }
-        stage('Run Docker') {
-            steps {
-                echo 'Running..'
-                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-            }
-        }
-        stage('Test web') {
-            steps {
-                timeout(5) {
-                    waitUntil {
-                        script {
-                        def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
-                        return (r == 0);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    def man = readJSON file: 'manifest_new.json'
+    echo "${man.manifest_version}"
+
+    // stages {
+    //     stage('Pull Docker') {
+    //         steps {
+    //             echo 'Pulling..'
+    //             sh 'docker pull pablitorub/journals:latest'
+    //         }
+    //     }
+    //     stage('Docker exists?') {
+    //         steps {
+    //             sh 'chmod u+rx Scripts/checkdocker.sh'
+    //             sh 'Scripts/checkdocker.sh'
+    //         }
+    //     }
+    //     stage('Run Docker') {
+    //         steps {
+    //             echo 'Running..'
+    //             sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+    //         }
+    //     }
+    //     stage('Test web') {
+    //         steps {
+    //             timeout(5) {
+    //                 waitUntil {
+    //                     script {
+    //                     def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
+    //                     return (r == 0);
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
 
     post {
         always {
