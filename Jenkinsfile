@@ -1,7 +1,6 @@
-#!groovy
 
-def mannew = readJSON file: 'manifest-new.json'
-def manold = readJSON file: 'manifest-old.json'
+def mannew 
+def manold
 
 pipeline {
     agent { node { label 'pr-bc' } }
@@ -10,7 +9,10 @@ pipeline {
         stage ('Revisar manifest'){
             
             steps {
+                
                 script {
+                    mannew = readJSON file: 'manifest-new.json'
+                    manold = readJSON file: 'manifest-old.json'
                     if (mannew.manifest_version == manold.manifest_version){
                     echo 'por definir el manifesto'
                     def man = readJSON file: 'manifest-new.json'
