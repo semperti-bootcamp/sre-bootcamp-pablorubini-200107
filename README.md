@@ -1,34 +1,14 @@
-# Week 01 - Assignments
-Repositorio para los assignments de la primer semana.
+# Configuración de la VM con Ansible
 
-# Java Application
+Se configuró la vm a través de 2 playbooks:
+	- bc-config-playbook -> Instala java 8 y Maven
+	- bc-config-playbook mysql -> Instala Mariadb
 
-## Prerequisites
+## Imagen de los paquetes configurados
+Aqui se muestran los paquetes instalados y las versiones correspondientes acorde a lo solicitado
 
-	1. Java 8
-	2. Maven 3.3+
-	3. MySQL 5.6+
-	4. Internet connection
-	
-	
-## Instrucciones para correr esta aplicación
+![Componentes instalados](/Images/Installed-components.jpg)
 
-	1. Configurar la conexión de la base de datos desde Code/src/main/resources/application.properties
-	2. Ubicate en la carpeta del código y ejecutá "mvn spring-boot:run".
-	3. Revisá la siguiente dirección http://localhost:8080
-	4. [Opcional] Por defecto, la aplicación almacena los PDFs en el directorio <User_home>/upload. Si querés cambiar este directorio, podés utilizar la propiedad -Dupload-dir=<path>.
-	5. [Opcional] Los PDFs predefinidos pueden encontrarse en la carpeta PDF. Si querés ver los PDFs, tenés que copiar los contenidos de esta carpeta a lo definido en el paso anterior.
-	
-## Datos de autenticación
+**Nota:** Decidí separar la instalación de Mariadb en un playbook aparte, porque desconocía la complejidad que podía traer instalar una base de datos, y no quería que "comprometa" la instalación de java y maven. 
 
-	El sistema viene con 4 cuentas pre-definidas:
-		1. publishers:
-			- username: publisher1 / password: publisher1
-			- username: publisher2 / password: publisher2
-		2. public users:
-			- username: user1 / password: user1
-			- username: user2 / password: user2
-            
-# Contact
-
-Cualquier duda o consulta, ubicanos en [Slack](https://semperti.slack.com).
+**Aprendizaje:** A medida que fui investigando Ansible, descubrí que un *best practice* hubiese sido implementar roles, y mediante estos, instalar los prerequisitos solicitados. Será tema de estudio posterior, entendiendo la mejora que implica realizar configuraciones a través de roles.

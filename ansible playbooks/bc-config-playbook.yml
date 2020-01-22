@@ -1,0 +1,38 @@
+- hosts: bootcamp
+  remote_user: root
+  become: yes
+  tasks:
+#### install Java 8
+    - name: install Java 8
+      yum:
+        name: java-1.8.0-openjdk
+        state: present  
+    - name: install Maven
+      yum:
+        name: maven
+        state: removed
+#### install Maven 3.6.3
+    - name: Unarchive Maven 3.6.3
+      unarchive:
+        src: https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz
+        dest: /opt
+        remote_src: yes
+    - name: Create symbolic link 
+      file:
+        src: "/opt/apache-maven-3.6.3"
+        dest: "/opt/maven"
+        state: link
+    - name: Create maven.sh
+      file:
+        path: "/etc/profile.d/maven.sh"
+        mode: u+x
+    - name: Modify file  
+      copy:
+        dest: "/etc/profile.d/maven.sh"
+        content: |
+          export JAVA_HOME=/usr/lib/jvm/jre-openjdk
+          export M2_HOME=/opt/maven
+          export MAVEN_HOME=/opt/maven
+          export PATH=${M2_HOME}/bin:${PATH}
+    - name: Run maven.sh
+      shell: source /etc/profile.d/maven.sh
