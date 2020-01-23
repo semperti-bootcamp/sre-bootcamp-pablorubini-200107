@@ -1,7 +1,7 @@
 #!/bin/bash
 git diff --name-only HEAD HEAD~1 | grep manifest.json
-if [$? == 0] then
-    return 0    
+if [$? == 0]; then
+    exit 0    
 else
-    return 1
+    exit 1
 fi
