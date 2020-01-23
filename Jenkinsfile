@@ -13,7 +13,8 @@ pipeline {
                 script {
                     mannew = readJSON file: 'manifest-new.json'
                     manold = readJSON file: 'manifest-old.json'
-                    if (mannew.manifest_version == manold.manifest_version){
+                    def retstatus = sh 'Scripts/repostatus.sh', returnStatus:true
+                    if ( rertstatus != 0 ){
                         echo "No existen cambios en el repo" 
                     } else {
                         echo 'hay cambios en el repo, building...'
