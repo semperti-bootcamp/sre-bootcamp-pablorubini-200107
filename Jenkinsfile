@@ -20,24 +20,25 @@ pipeline {
                         if (manifest.ambiente == 'Produccion') {
                             echo 'Ambiente Productivo' 
                             stage('Pull Docker') {
-                                    echo 'Pulling..'
-                                    sh 'docker pull pablitorub/journals:latest'
+                                echo 'Pulling..'
+                                sh 'docker pull pablitorub/journals:latest'
                             }
                             stage('Docker exists?') {
-                                    sh 'Scripts/checkdocker.sh'
+                                sh 'Scripts/checkdocker.sh'
                             }
                             stage('Run Docker') {
-                                    echo 'Running..'
-                                    sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                                echo 'Running..'
+                                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                            }
                             stage('Test web') {
-                                    timeout(5) {
-                                        waitUntil {
-                                            script {
-                                            def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
-                                            return (r == 0);
-                                            }
+                                timeout(5) {
+                                    waitUntil {
+                                        script {
+                                        def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
+                                        return (r == 0);
                                         }
                                     }
+                                }
                             }   
                         } // if ambiente staging entonces no pulleo ni corro
                     }
