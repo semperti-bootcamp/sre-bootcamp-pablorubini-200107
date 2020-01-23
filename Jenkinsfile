@@ -13,50 +13,17 @@ pipeline {
                 script {
                     manifest = readJSON file: 'manifest.json'
                     def retstatus = sh (script: 'Scripts/repostatus.sh', returnStatus:true)
-                    if ( retstatus != 0 ){
+                    if ( retstatus == 0 ){  //Recordar cambiar == por !=
                         echo "No existen cambios en el repo" 
                     } else {
-                        echo 'hay cambios en el repo, building...'
-                                                    
-                            //If ambiente prod entonces hago todo Y PUERTO 8080
-
-                            if (manifest.ambiente == 'Produccion') {
-                                echo 'Ambiente Productivo'
-                                stages {
-                                    stage('Pull Docker') {
-                                        steps {
-                                            echo 'Pulling..'
-                                            sh 'docker pull pablitorub/journals:latest'
-                                        }
-                                    }
-                                    stage('Docker exists?') {
-                                        steps {
-                                            sh 'chmod u+rx Scripts/checkdocker.sh'
-                                            sh 'Scripts/checkdocker.sh'
-                                        }
-                                    }
-                                    stage('Run Docker') {
-                                        steps {
-                                            echo 'Running..'
-                                            sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
-                                        }
-                                    }
-                                    stage('Test web') {
-                                        steps {
-                                            timeout(5) {
-                                                waitUntil {
-                                                    script {
-                                                    def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
-                                                    return (r == 0);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                                                    // if ambiente staging entonces no pulleo ni corro
-                        }
+                        echo 'hay cambios en el manifest...'
+                        if (manifest.ambiente == 'Produccion') {
+                            echo 'Ambiente Productivo' 
+                            stage ('Prueba de paso') {
+                                echo 'estoy dentro del stage de prueba'
+                            }   
+                            } // if ambiente staging entonces no pulleo ni corro
+                    }
 
                 }
             }
