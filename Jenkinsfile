@@ -20,24 +20,48 @@ pipeline {
                                                     
                             //If ambiente prod entonces hago todo Y PUERTO 8080
 
-                            if (manifest.ambiente = 'Produccion') {
+                            if (manifest.ambiente == 'Produccion') {
                                 echo 'Ambiente Productivo'
-                                stage ('Pull Docker'){
-                                    echo 'Pulling docker ...'
-                                    sh 'docker pull pablitorub/journals:latest'
-                                    def port = 8080
-                                stage (){
-                                    
+                                
+                                stage('Pull Docker') {
+                                    steps {
+                                        echo 'Pulling..'
+                                        sh 'docker pull pablitorub/journals:latest'
+                                    }
+                                }
+                                stage('Docker exists?') {
+                                    steps {
+                                        sh 'chmod u+rx Scripts/checkdocker.sh'
+                                        sh 'Scripts/checkdocker.sh'
+                                    }
+                                }
+                                stage('Run Docker') {
+                                    steps {
+                                        echo 'Running..'
+                                        sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                                    }
+                                }
+                                stage('Test web') {
+                                    steps {
+                                        timeout(5) {
+                                            waitUntil {
+                                                script {
+                                                def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
+                                                return (r == 0);
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                            // if ambiente staging entonces no pulleo ni corro
-                            }
+                                                    // if ambiente staging entonces no pulleo ni corro
+                        }
 
-                    }
                 }
-            } 
-        }
+            }
+        } 
     }
+    
 
 
     // stages {
