@@ -19,11 +19,11 @@ pipeline {
                         echo 'hay cambios en el repo, building...'
                         
                         echo 'Actualizando manifest-old'
-                            sh 'rm -rf manifest-old.json'
-                            sh 'cp manifest-new.json manifest-old.json'
-                            sh 'git status'
-                            sh 'git commit -am "Updated"'                             
-                            sh 'git push -u origin a09-gitops'
+                            sh 'Scripts/updategit.sh'
+                            // sh 'cp manifest-new.json manifest-old.json'
+                            // sh 'git status'
+                            // sh 'git commit -am "Updated"'                             
+                            // sh 'git push -u origin a09-gitops'
                             
                             //Falta pushear desde el server los archivos modificados a la branch a09-gitops
 
