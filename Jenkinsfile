@@ -19,7 +19,7 @@ pipeline {
                         echo 'hay cambios en el repo, building...'
                         
                         echo 'Actualizando manifest-old'
-                            sh 'Scripts/updategit.sh'
+                            // sh 'Scripts/updategit.sh'
                             // sh 'cp manifest-new.json manifest-old.json'
                             // sh 'git status'
                             // sh 'git commit -am "Updated"'                             
