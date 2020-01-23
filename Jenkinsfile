@@ -24,11 +24,11 @@ pipeline {
                                 sh 'docker pull pablitorub/journals:latest'
                             }
                             stage('Docker exists?') {
-                                sh 'Scripts/checkdocker.sh'
+                                sh 'Scripts/checkdocker-prod.sh'
                             }
                             stage('Run Docker') {
                                 echo 'Running..'
-                                sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                                sh 'docker run -d --privileged --name journals_app_prod  -p 8080:8080 -ti pablitorub/journals:latest'
                             }
                             stage('Test web') {
                                 timeout(5) {
@@ -40,7 +40,32 @@ pipeline {
                                     }
                                 }
                             }   
-                        } // if ambiente staging entonces no pulleo ni corro
+                        } else {
+                            if ( manifest.ambiente == 'Staging' ){
+                                echo 'Ambiente Staging'
+                                stage('Pull Docker') {
+                                echo 'Pulling..'
+                                sh 'docker pull pablitorub/journals:latest'
+                            }
+                            stage('Docker exists?') {
+                                sh 'Scripts/checkdocker-noprod.sh'
+                            }
+                            stage('Run Docker') {
+                                echo 'Running..'
+                                sh 'docker run -d --privileged --name journals_app_noprod  -p 8081:8080 -ti pablitorub/journals:latest'
+                            }
+                            stage('Test web') {
+                                timeout(5) {
+                                    waitUntil {
+                                        script {
+                                        def r = sh script: 'curl http://10.252.7.110:8081 -o /dev/null', returnStatus: true
+                                        return (r == 0);
+                                        }
+                                    }
+                                }
+                            }   
+                            }
+                        }// if ambiente staging entonces no pulleo ni corro
                     }
                 }
             }
