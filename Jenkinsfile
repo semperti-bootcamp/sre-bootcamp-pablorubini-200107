@@ -22,32 +22,33 @@ pipeline {
 
                             if (manifest.ambiente == 'Produccion') {
                                 echo 'Ambiente Productivo'
-                                
-                                stage('Pull Docker') {
-                                    steps {
-                                        echo 'Pulling..'
-                                        sh 'docker pull pablitorub/journals:latest'
+                                stages {
+                                    stage('Pull Docker') {
+                                        steps {
+                                            echo 'Pulling..'
+                                            sh 'docker pull pablitorub/journals:latest'
+                                        }
                                     }
-                                }
-                                stage('Docker exists?') {
-                                    steps {
-                                        sh 'chmod u+rx Scripts/checkdocker.sh'
-                                        sh 'Scripts/checkdocker.sh'
+                                    stage('Docker exists?') {
+                                        steps {
+                                            sh 'chmod u+rx Scripts/checkdocker.sh'
+                                            sh 'Scripts/checkdocker.sh'
+                                        }
                                     }
-                                }
-                                stage('Run Docker') {
-                                    steps {
-                                        echo 'Running..'
-                                        sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                                    stage('Run Docker') {
+                                        steps {
+                                            echo 'Running..'
+                                            sh 'docker run -d --privileged --name journals_app  -p 8080:8080 -ti pablitorub/journals:latest'
+                                        }
                                     }
-                                }
-                                stage('Test web') {
-                                    steps {
-                                        timeout(5) {
-                                            waitUntil {
-                                                script {
-                                                def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
-                                                return (r == 0);
+                                    stage('Test web') {
+                                        steps {
+                                            timeout(5) {
+                                                waitUntil {
+                                                    script {
+                                                    def r = sh script: 'curl http://10.252.7.110:8080 -o /dev/null', returnStatus: true
+                                                    return (r == 0);
+                                                    }
                                                 }
                                             }
                                         }
