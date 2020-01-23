@@ -18,15 +18,19 @@ pipeline {
                     } else {
                         echo 'hay cambios en el repo, building...'
                                                     
-                            //Falta pushear desde el server los archivos modificados a la branch a09-gitops
-
                             //If ambiente prod entonces hago todo Y PUERTO 8080
+
+                            if (manifest.ambiente = 'Produccion') {
+                                echo 'Ambiente Productivo'
+                                stage ('Pull Docker'){
+                                    echo 'Pulling docker ...'
+                                    sh 'docker pull pablitorub/journals:latest'
+                                    def port = 8080
+                                stage (){
+                                    
+                                }
+                            }
                             // if ambiente staging entonces no pulleo ni corro
-
-                            stage ('Pull Docker'){
-                                echo 'Pulling docker ...'
-                                sh 'docker pull pablitorub/journals:latest'
-
                             }
 
                     }
