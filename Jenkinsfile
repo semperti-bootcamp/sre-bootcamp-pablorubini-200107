@@ -11,21 +11,13 @@ pipeline {
             steps {
                 
                 script {
-                    mannew = readJSON file: 'manifest-new.json'
-                    manold = readJSON file: 'manifest-old.json'
+                    manifest = readJSON file: 'manifest.json'
                     def retstatus = sh 'Scripts/repostatus.sh', returnStatus:true
                     if ( rertstatus != 0 ){
                         echo "No existen cambios en el repo" 
                     } else {
                         echo 'hay cambios en el repo, building...'
-                        
-                        echo 'Actualizando manifest-old'
-                            // sh 'Scripts/updategit.sh'
-                            // sh 'cp manifest-new.json manifest-old.json'
-                            // sh 'git status'
-                            // sh 'git commit -am "Updated"'                             
-                            // sh 'git push -u origin a09-gitops'
-                            
+                                                    
                             //Falta pushear desde el server los archivos modificados a la branch a09-gitops
 
                             //If ambiente prod entonces hago todo Y PUERTO 8080
