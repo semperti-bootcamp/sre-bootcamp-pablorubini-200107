@@ -21,8 +21,11 @@ pipeline {
                             echo 'Ambiente Productivo' 
                             stage ('Prueba de paso') {
                                 echo 'estoy dentro del stage de prueba'
+                            }
+                            stage ('Prueba de paso2') {
+                                echo 'estoy dentro del stage de prueba2'
                             }   
-                            } // if ambiente staging entonces no pulleo ni corro
+                        } // if ambiente staging entonces no pulleo ni corro
                     }
 
                 }
