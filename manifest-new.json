@@ -4,5 +4,5 @@
     "version": "versionString",
     "default_locale": "en",
 
-    "tipo_ambiente":"producción"
+    "ambiente":"staging"
 }
