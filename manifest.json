@@ -4,6 +4,6 @@
     "version": "versionString",
     "default_locale": "en",
 
-    "ambiente":"Prod"
+    "ambiente":"No prod"
 
 }

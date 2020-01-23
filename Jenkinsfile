@@ -12,7 +12,7 @@ pipeline {
                 
                 script {
                     manifest = readJSON file: 'manifest.json'
-                    def retstatus = sh 'Scripts/repostatus.sh', returnStatus:true
+                    def retstatus = sh (script: 'Scripts/repostatus.sh', returnStatus:true)
                     if ( rertstatus != 0 ){
                         echo "No existen cambios en el repo" 
                     } else {
