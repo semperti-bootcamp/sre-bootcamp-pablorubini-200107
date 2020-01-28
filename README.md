@@ -1,34 +1,14 @@
-# Week 01 - Assignments
-Repositorio para los assignments de la primer semana.
+# Creación de un *Manifest*
 
-# Java Application
+El archivo *Manifest* genera un nuevo despligue del container de la app al cambiar la variable *Ambiente*
+La misma puede tomar los valores de *Produccion* o *Staging*
 
-## Prerequisites
+El container *Produccion* será accesible mediante el link 10.252.7.110:8080
 
-	1. Java 8
-	2. Maven 3.3+
-	3. MySQL 5.6+
-	4. Internet connection
-	
-	
-## Instrucciones para correr esta aplicación
+El container de *Staging* será accesible mediante el link 10.252.7.110:8081
 
-	1. Configurar la conexión de la base de datos desde Code/src/main/resources/application.properties
-	2. Ubicate en la carpeta del código y ejecutá "mvn spring-boot:run".
-	3. Revisá la siguiente dirección http://localhost:8080
-	4. [Opcional] Por defecto, la aplicación almacena los PDFs en el directorio <User_home>/upload. Si querés cambiar este directorio, podés utilizar la propiedad -Dupload-dir=<path>.
-	5. [Opcional] Los PDFs predefinidos pueden encontrarse en la carpeta PDF. Si querés ver los PDFs, tenés que copiar los contenidos de esta carpeta a lo definido en el paso anterior.
-	
-## Datos de autenticación
 
-	El sistema viene con 4 cuentas pre-definidas:
-		1. publishers:
-			- username: publisher1 / password: publisher1
-			- username: publisher2 / password: publisher2
-		2. public users:
-			- username: user1 / password: user1
-			- username: user2 / password: user2
-            
-# Contact
+## Problemas encontrados
 
-Cualquier duda o consulta, ubicanos en [Slack](https://semperti.slack.com).
+Me llevó más de lo previsto entender el concepto del archivo *Manifest* y encontrar la forma de que funcionara todo en base a un cambio en el archivo.
+Por ende, una vez comprendido el punto (gracias a tu ayuda Jon), busqué una solución conceptual, y no una buena práctica ni versionado del mismo archivo.
